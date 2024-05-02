@@ -1,15 +1,25 @@
 import { useEffect } from 'react';
 import './App.css';
-// window.Telegram.WebApp;
-const tg = window.Telegram.WebApp;
+import { useTelegram } from './hooks/useTelegram';
+import Header from './components/Header/Header';
+import { Route, Routes } from 'react-router-dom';
+import ProductList from './components/ProductList/ProductList';
+import Form from './components/Form/Form';
+
 function App() {
+
+  const {onToggleButton, tg} = useTelegram();
 
   useEffect(() => {
     tg.ready();
   })
   return (
     <div className="App">
-      it works
+      <Header/>
+      <Routes>
+        <Route index element={<ProductList />}/>
+        <Route path={'form'} element={<Form />}/>
+      </Routes>
     </div>
   );
 }
